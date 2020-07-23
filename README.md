@@ -64,6 +64,7 @@ def Thread_partial_test():
 ```
 
 - 闭包
+- windows下多进程需要序列化，闭包不支持序列化，所以windows多进程闭包不支持
 ```python
 def wadd(x):
     def add(m):
