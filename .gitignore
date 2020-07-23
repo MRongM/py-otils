@@ -4,3 +4,4 @@ build
 dist
 otils.egg-info
 .idea
+test/*.txt
