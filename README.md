@@ -12,7 +12,7 @@ python setup.py install
 #### 线程并行
 
 ```python
-from otils.HManager import Manager
+from otils import Manager
 
 tm = Manager(lambda x: x + 10, list(range(10)), num=2, test=True)
 tm.do_work()
@@ -25,7 +25,7 @@ tm.do_work()
 - handler function **不支持lambda**
 
 ```python
-from otils.HManager import Manager
+from otils import Manager
 
 def foo(x):
     return x + 10
@@ -82,7 +82,7 @@ def Thread_closure_test():
 - 文本与xlsx读写
 
 ```python
-from otils.HOO import Writer,Reader
+from otils import Writer,Reader
 wr = Writer('id',suffix='txt',delimiter=',')
 data = [['1','2','3'],['4','5','6']]
 wr.write(data)
@@ -98,9 +98,16 @@ rd.read()
 - 时间函数
 
 ```
-from otils.HOO import now_add,now
+from otils import now_add,now
 
 now_add(7)
 now()
 ```
 
+- 文件大小
+
+```
+from otils import get_size
+get_size(path)
+
+```

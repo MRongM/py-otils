@@ -79,12 +79,25 @@ class Reader:
         return data
 
 
-def now_add(n=0):
+def now_add(n=0,fmt='%Y-%m-%d'):
     now = datetime.datetime.now()
     add_data = now + timedelta(days=n)
-    return add_data.strftime('%Y-%m-%d')
+    return add_data.strftime(fmt)
 
 
-def now():
+def now(fmt='%Y-%m-%d %H:%M:%S'):
     now = datetime.datetime.now()
-    return now.strftime('%Y-%m-%d %H:%M:%S')
+    return now.strftime(fmt)
+
+
+def get_size(path):
+    """
+    :param path: 文件路径 
+    :return: size, size_kb, size_mb, size_gb
+    """
+    size = os.path.getsize(path)
+    size_kb = size/1024
+    size_mb = size_kb/1024
+    size_gb = size_mb/1024
+    return size, size_kb, size_mb, size_gb
+
