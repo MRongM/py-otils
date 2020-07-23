@@ -1,7 +1,18 @@
 import time
 import os
+import datetime
+from datetime import timedelta
 from xlsxwriter import workbook
 
+
+
+"""
+office utils for human beings
+
+Writer
+Reader
+
+"""
 
 class _OO:
     def orun(self, ident):
@@ -66,3 +77,14 @@ class Reader:
             ff.close()
 
         return data
+
+
+def now_add(n=0):
+    now = datetime.datetime.now()
+    add_data = now + timedelta(days=n)
+    return add_data.strftime('%Y-%m-%d')
+
+
+def now():
+    now = datetime.datetime.now()
+    return now.strftime('%Y-%m-%d %H:%M:%S')

@@ -76,3 +76,31 @@ def Thread_closure_test():
     tm.do_work()
 
 ```
+
+#### 其他工具
+
+- 文本与xlsx读写
+
+```python
+from otils.HOO import Writer,Reader
+wr = Writer('id',suffix='txt',delimiter=',')
+data = [['1','2','3'],['4','5','6']]
+wr.write(data)
+
+wr = Writer('id',suffix='xlsx')
+data = [['1','2','3'],['4','5','6']]
+wr.write(data)
+
+rd = Reader('id',suffix='txt',delimiter=',')
+rd.read()
+```
+
+- 时间函数
+
+```
+from otils.HOO import now_add,now
+
+now_add(7)
+now()
+```
+
