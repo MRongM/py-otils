@@ -5,7 +5,7 @@ setup(
     version="1.0.1",
     keywords=[name, ],
     description=f"{name} tools",
-    long_description=open('README.md').read(),
+    long_description=open('README.md','r',encoding='utf8').read(),
     license="MIT",
     url="https://github.com/MRongM/py-otils.git",
     author="mrongm",
