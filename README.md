@@ -1,3 +1,6 @@
+### [py-otils](https://github.com/MRongM/py-otils.git)
+- 
+
 ### 说明
 - python office tools for human beings
 - 常用工具包装模块
@@ -21,7 +24,7 @@ tm.do_work()
 
 #### 进程并行
 
-- windows下进程执行入口必须为**if __name__ == '__main__':**
+- windows下进程执行入口必须为**if \_\_name\_\_ == '\_\_main\_\_':**
 - handler function **不支持lambda**
 
 ```python
@@ -97,7 +100,7 @@ rd.read()
 
 - 时间函数
 
-```
+```python
 from otils import now_add,now
 
 now_add(7)
@@ -106,8 +109,9 @@ now()
 
 - 文件大小
 
-```
+```python
 from otils import get_size
 get_size(path)
 
 ```
+
