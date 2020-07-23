@@ -116,3 +116,21 @@ get_size(path)
 
 ```
 
+- 批量执行模块内无参数方法
+
+```python
+from otils import batch_run_func
+
+module = __import__('tManager')
+batch_run_func(module)
+
+```
+
+- 匹配字符之间的子串
+
+```python
+
+from otils import get_between
+get_between('abchdhshedmm','ch','ed')
+
+```
