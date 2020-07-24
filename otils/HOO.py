@@ -2,7 +2,6 @@ import time
 import os
 import datetime
 from datetime import timedelta
-from xlsxwriter import workbook
 
 
 
@@ -41,6 +40,7 @@ class Writer:
 
     def write(self, data):
         if self.suffix == 'xlsx':
+            from xlsxwriter import workbook
             wb = workbook.Workbook(self.path)
             ws = wb.add_worksheet()
 

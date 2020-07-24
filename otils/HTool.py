@@ -1,3 +1,8 @@
+from functools import wraps
+
+"""
+日常小工具
+"""
 
 def now_add(n=0,fmt='%Y-%m-%d'):
     now = datetime.datetime.now()
@@ -67,3 +72,26 @@ def get_between(word, start, end):
     import re
     return re.findall(f'{start}([\s\S]*){end}', word)
 
+
+def cost(slice=None):
+	"""
+	函数执行时间
+	"""
+    if slice is None:
+        slice = 1
+
+    def _cost(func):
+        @wraps(func)
+        def warp(*args, **kwargs):
+            st = time.time()
+            rs = func(*args, **kwargs)
+            print(
+                f'pid:{os.getpid()} func name:{func.__name__} '
+                f'cost:{time.time() - st} args:{args[slice:]}' +
+                (f"kwargs:{kwargs}" if kwargs else '')
+            )
+            return rs
+
+        return warp
+
+    return _cost
