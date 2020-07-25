@@ -1,5 +1,5 @@
-from otils import HThread
-from otils import HProcess
+from otils import thread
+from otils import process
 import os
 
 
@@ -38,9 +38,9 @@ class Manager:
         """
         self.wtype = wtype
         if self.wtype == 'thread':
-            Worker = HThread.Worker
+            Worker = thread.Worker
         elif self.wtype == 'process':
-            Worker = HProcess.Worker
+            Worker = process.Worker
             num = num or os.cpu_count()
         else:
             raise ValueError('worker_type need specific')

@@ -1,8 +1,7 @@
 ### [py-otils](https://github.com/MRongM/py-otils.git)
-- 
 
 ### 说明
-- python office tools for human beings
+- python office utils for human beings
 - 常用工具包装模块
 
 ### 安装
@@ -12,7 +11,7 @@ python setup.py install
 
 ### 示例
 
-#### 线程并行
+#### 线程分发
 
 ```python
 from otils import Manager
@@ -22,7 +21,7 @@ tm.do_work()
 
 ```
 
-#### 进程并行
+#### 进程分发
 
 - windows下进程执行入口必须为**if \_\_name\_\_ == '\_\_main\_\_':**
 - handler function **不支持lambda**

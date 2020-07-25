@@ -1,3 +1,5 @@
+import datetime
+from datetime import timedelta
 
 def now_add(n=0,fmt='%Y-%m-%d'):
     now = datetime.datetime.now()

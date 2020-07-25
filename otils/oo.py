@@ -1,7 +1,5 @@
 import time
 import os
-import datetime
-from datetime import timedelta
 from xlsxwriter import workbook
 
 

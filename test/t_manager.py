@@ -1,4 +1,4 @@
-from otils.HManager import Manager
+from otils import Manager
 from functools import partial
 
 
