@@ -142,8 +142,20 @@ batch_run_func(module)
 - 匹配字符之间的子串
 
 ```python
-
 from otils import get_between
 get_between('abchdhshedmm','ch','ed')
+```
+
+- 函数计时装饰器
+
+```python
+ 
+@cost()
+def Coro_test(timeout=10):
+    add_100 = wadd(100)
+    add_10 = wadd(10)
+    func_list = [add_10, add_100]
+    tm = Manager(func_list, list(range(11)), num=3, test=True, wtype='coro',sleep=2,timeout=timeout)
+    tm.do_work()
 
 ```

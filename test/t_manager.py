@@ -1,4 +1,4 @@
-from otils import Manager
+from otils import Manager,cost
 from functools import partial
 
 
@@ -56,6 +56,7 @@ def Thread_error_test(test=True):
     tm = Manager(func_list, list(range(11)), num=2, test=test)
     tm.do_work()
 
+@cost()
 def Coro_test(timeout=10):
     add_100 = wadd(100)
     add_10 = wadd(10)
@@ -66,9 +67,9 @@ def Coro_test(timeout=10):
 
 if __name__ == '__main__':
     # Thread_test()
-    # Coro_test()
+    Coro_test()
     # Thread_partial_test()
-    Thread_closure_test()
+    # Thread_closure_test()
     # Process_test()
     # Thread_error_test()
     print()
