@@ -1,4 +1,4 @@
-from otils.HManager import *
+from otils.manager import *
 from otils.oo import *
 from otils.tool import *
 

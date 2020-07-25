@@ -31,7 +31,7 @@ class Manager:
         :param begin: 对data_list索引位置处理
         :param end: 对data_list索引位置处理
         :param spec: 是否对data_list索引位置处理
-        :param wtype: 工作线程或者进程
+        :param wtype: 工作线程或者进程 thread or process
         :param path: 结果保存路径
         :param suffix: 文件后缀
         :return: None

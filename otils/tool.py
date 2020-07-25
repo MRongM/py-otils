@@ -1,7 +1,14 @@
 import datetime
 from datetime import timedelta
+from functools import wraps
+import time, os
 
-def now_add(n=0,fmt='%Y-%m-%d'):
+"""
+日常小工具
+"""
+
+
+def now_add(n=0, fmt='%Y-%m-%d'):
     now = datetime.datetime.now()
     add_data = now + timedelta(days=n)
     return add_data.strftime(fmt)
@@ -18,9 +25,9 @@ def get_size(path):
     :return: size, size_kb, size_mb, size_gb
     """
     size = os.path.getsize(path)
-    size_kb = size/1024
-    size_mb = size_kb/1024
-    size_gb = size_mb/1024
+    size_kb = size / 1024
+    size_mb = size_kb / 1024
+    size_gb = size_mb / 1024
     return size, size_kb, size_mb, size_gb
 
 
@@ -69,3 +76,32 @@ def get_between(word, start, end):
     import re
     return re.findall(f'{start}([\s\S]*){end}', word)
 
+
+def cost(sli=None):
+    """
+    函数执行时间
+    :param sli int or tuple or list 切片args以打印
+    """
+
+    if sli is None:
+        sli = (0, 256)
+
+    def _cost(func):
+        @wraps(func)
+        def warp(*args, **kwargs):
+            st = time.time()
+            rs = func(*args, **kwargs)
+            if type(sli) is int:
+                sargs = args[sli]
+            else:
+                sargs = args[sli[0]:sli[1]]
+            print(
+                f'pid:{os.getpid()} func name:{func.__name__} '
+                f'cost:{time.time() - st} args:{sargs}' +
+                (f"kwargs:{kwargs}" if kwargs else '')
+            )
+            return rs
+
+        return warp
+
+    return _cost

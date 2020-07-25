@@ -1,16 +1,13 @@
 import time
 import os
-from xlsxwriter import workbook
-
 
 
 """
-office utils for human beings
-
+一些对象
 Writer
 Reader
-
 """
+
 
 class _OO:
     def orun(self, ident):
@@ -39,6 +36,7 @@ class Writer:
 
     def write(self, data):
         if self.suffix == 'xlsx':
+            from xlsxwriter import workbook
             wb = workbook.Workbook(self.path)
             ws = wb.add_worksheet()
 
