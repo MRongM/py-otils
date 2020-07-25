@@ -15,9 +15,9 @@ class _OO:
         wres = []
         try:
             for idx in range(ll):
-                item = self.data[idx]
                 if idx < self.begin or idx >= self.end:
                     continue
+                item = self.data[idx]
                 res = self.func(item)
                 if res:
                     if self.test: print(f'ident:{ident} num:{idx} item:{item} res:{res}')

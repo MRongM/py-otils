@@ -42,12 +42,13 @@ def batch_run_func(model, spec=None, no=None, test=False):
     """
     ser = []
     import inspect
+    from types import FunctionType
     attrs = dir(model)
     for ar in attrs:
         func = getattr(model, ar)
-        if callable(func):
+        if callable(func) and isinstance(func, FunctionType):
             fname = func.__name__
-            ag = inspect.getargs(func.__doc__)
+            ag = inspect.getargs(func.__code__)
             args = ag.args
             varargs = ag.varargs
             varkw = ag.varkw
@@ -58,8 +59,11 @@ def batch_run_func(model, spec=None, no=None, test=False):
                 break
             if no and fname in no:
                 continue
+            if test:
+                print(f'batch start {fname}')
             res = func()
-            if test: print(res)
+            if test:
+                print(f'batch end {fname}')
             ser.append(res)
     print(model.__name__ + " done")
     return ser
