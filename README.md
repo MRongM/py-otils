@@ -1,8 +1,7 @@
 ### [py-otils](https://github.com/MRongM/py-otils.git)
-- 
 
 ### 说明
-- python office tools for human beings
+- python office utils for human beings
 - 常用工具包装模块
 
 ### 安装
@@ -12,7 +11,7 @@ python setup.py install
 
 ### 示例
 
-#### 线程并行
+#### 线程分发
 
 ```python
 from otils import Manager
@@ -22,9 +21,9 @@ tm.do_work()
 
 ```
 
-#### 进程并行
+#### 进程分发
 
-- windows下进程执行入口必须为**if \_\_name\_\_ == '\_\_main\_\_':**
+- windows下进程执行入口必须为**if \_\_name\_\_ == \'\_\_main\_\_\':**
 - handler function **不支持lambda**
 
 ```python
@@ -42,11 +41,24 @@ if __name__ == '__main__':
 
 ```
 
+
+#### 协程分发
+
+```python
+def Coro_test():
+    add_100 = wadd(100)
+    add_10 = wadd(10)
+    func_list = [add_10, add_100]
+    tm = Manager(func_list, list(range(11)), num=3, test=True, wtype='coro',sleep=2,timeout=10)
+    tm.do_work()
+```
+
 #### 处理函数
 - 处理函数支持单函数传递，也支持函数列表
 - 对于需要特殊参数的函数可以通过闭包或者偏函数来解决；将参数封装到item内，由处理函数解包处理也是一种办法
 
 - 偏函数
+
 ```python
 from functools import partial
 
@@ -65,6 +77,7 @@ def Thread_partial_test():
 
 - 闭包
 - windows下多进程需要序列化，闭包不支持序列化，所以windows多进程闭包不支持
+
 ```python
 def wadd(x):
     def add(m):
@@ -129,8 +142,20 @@ batch_run_func(module)
 - 匹配字符之间的子串
 
 ```python
-
 from otils import get_between
 get_between('abchdhshedmm','ch','ed')
+```
+
+- 函数计时装饰器
+
+```python
+ 
+@cost()
+def Coro_test(timeout=10):
+    add_100 = wadd(100)
+    add_10 = wadd(10)
+    func_list = [add_10, add_100]
+    tm = Manager(func_list, list(range(11)), num=3, test=True, wtype='coro',sleep=2,timeout=timeout)
+    tm.do_work()
 
 ```

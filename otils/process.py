@@ -3,7 +3,7 @@ import os
 import time
 from multiprocessing import Process
 
-from otils.HOO import _OO
+from otils.oo import _OO
 
 
 class Worker(Process, _OO):
