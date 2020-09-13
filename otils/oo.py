@@ -20,12 +20,36 @@ class _OO:
                 item = self.data[idx]
                 res = self.func(item)
                 if res:
-                    if self.test: print(f'ident:{ident} num:{idx} item:{item} res:{res}')
+                    if self.test:
+                        print(f'ident:{ident} num:{idx} item:{item} res:{res}')
                     wres.append([str(ident), str(idx), str(item), str(res)])
-                if self.sleep: time.sleep(self.sleep)
+                if self.sleep:
+                    time.sleep(self.sleep)
+        except Exception as ee:
+            print(f"ident:{ident} index:{idx} item:{self.data[idx]} error {ee}")
+            print(f"exit orun and save to {self.filename}")
+            raise ee
         finally:
             wr = Writer(self.filename, path=self.path, suffix=self.suffix)
             wr.write(wres)
+
+
+class HandleUnit:
+    """
+    处理单元
+    """
+    def __init__(self, **kwargs):
+        """
+        只支持键值对传值 key=value
+        """
+        for k, v in kwargs.items():
+            setattr(self, k, v)
+
+    def handle(self):
+        """
+        处理方法，子对象需要实现此方法，用作处理函数
+        """
+        pass
 
 
 class Writer:

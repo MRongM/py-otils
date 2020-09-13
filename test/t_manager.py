@@ -67,9 +67,9 @@ def Coro_test(timeout=10):
 
 if __name__ == '__main__':
     # Thread_test()
-    Coro_test()
+    # Coro_test()
     # Thread_partial_test()
     # Thread_closure_test()
     # Process_test()
     # Thread_error_test()
-    print()
+    print('end')

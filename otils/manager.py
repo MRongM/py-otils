@@ -53,7 +53,7 @@ class Manager:
             self.coroutine = coroutine
             Worker = self.coroutine.Worker
         else:
-            raise ValueError('wotype need specific')
+            raise ValueError('wtype need specific')
 
         ll = len(self.data)
 

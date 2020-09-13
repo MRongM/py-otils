@@ -23,9 +23,9 @@ class Worker(_OO):
         self.orun(ident)
 
 
-def start(workers, num, timeout=None, error_fuc=None):
+def start(workers, num, timeout=None):
     po = pool.Pool(num)
     g = []
     for w in workers:
         g.append(po.spawn(w.run))
-    gevent.joinall(g, timeout=timeout, raise_error=error_fuc)
+    gevent.joinall(g, timeout=timeout)
