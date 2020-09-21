@@ -7,9 +7,9 @@ from otils.oo import _OO
 
 
 class Worker(Process, _OO):
-    def __init__(self, function, data, **kwargs):
+    def __init__(self, handler, data, **kwargs):
         super(Worker, self).__init__()
-        self.func = function
+        self.handler = handler
         self.data = data
         for k, v in kwargs.items():
             setattr(self, k, v)

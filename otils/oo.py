@@ -13,38 +13,44 @@ class _OO:
     def orun(self, ident):
         ll = len(self.data)
         wres = []
+        if type(self.handler) is type:
+            flag = issubclass(self.handler, HandleUnit)
+        else:
+            flag = False
         try:
             for idx in range(ll):
                 if idx < self.begin or idx >= self.end:
                     continue
                 item = self.data[idx]
-                res = self.func(item)
-                if res:
-                    if self.test:
-                        print(f'ident:{ident} num:{idx} item:{item} res:{res}')
-                    wres.append([str(ident), str(idx), str(item), str(res)])
+
+                try:
+                    if flag:
+                        """此时handler是类需要执行实例方法,入参为item"""
+                        res = self.handler(item).handle()
+                    else:
+                        """此时handler是方法"""
+                        res = self.handler(item)
+
+                except Exception as ee:
+                    print(f"ident:{ident} index:{idx} item:{self.data[idx]} error {ee}")
+                    raise ee
+
+                if self.test:
+                    print(f'ident:{ident} num:{idx} item:{item} res:{res}')
+                wres.append([str(ident), str(idx), str(item), str(res)])
+
                 if self.sleep:
                     time.sleep(self.sleep)
-        except Exception as ee:
-            print(f"ident:{ident} index:{idx} item:{self.data[idx]} error {ee}")
-            print(f"exit orun and save to {self.filename}")
-            raise ee
         finally:
-            wr = Writer(self.filename, path=self.path, suffix=self.suffix)
-            wr.write(wres)
+            if wres:
+                wr = Writer(self.filename, path=self.path, suffix=self.suffix)
+                wr.write(wres)
 
 
 class HandleUnit:
     """
     处理单元
     """
-    def __init__(self, **kwargs):
-        """
-        只支持键值对传值 key=value
-        """
-        for k, v in kwargs.items():
-            setattr(self, k, v)
-
     def handle(self):
         """
         处理方法，子对象需要实现此方法，用作处理函数
@@ -53,7 +59,7 @@ class HandleUnit:
 
 
 class Writer:
-    def __init__(self, filename, suffix='txt', delimiter='#', path=''):
+    def __init__(self, filename, suffix='txt', delimiter='_#_', path=''):
         self.suffix = suffix
         self.delimiter = delimiter
         self.path = os.path.join(path, f'{filename}.{suffix}')
@@ -80,7 +86,7 @@ class Writer:
 
 
 class Reader:
-    def __init__(self, filename, suffix='txt', delimiter='#', path=''):
+    def __init__(self, filename, suffix='txt', delimiter='_#_', path=''):
         self.suffix = suffix
         self.delimiter = delimiter
         self.path = os.path.join(path, f'{filename}.{suffix}')

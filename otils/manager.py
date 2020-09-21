@@ -5,12 +5,12 @@ import os
 
 class Manager:
     """
-    任务并行分配器
+    任务并行分配器 接受现实HandlerUnit的class
     """
 
-    def __init__(self, func, data_list, **kwargs):
+    def __init__(self, handler, data_list, **kwargs):
         """
-        :param func: 处理函数或者由处理函数组成的列表
+        :param handler: 处理函数/由处理函数组成的列表/接受现实HandlerUnit的class
         :param data_list: 数据集列表
         :param kwargs: 可选参数
         :param test: 执行任务是否打印
@@ -26,10 +26,10 @@ class Manager:
         :param timeout: 协程超时时间
         :return: None
         """
-        if type(func) == list:
-            self.func_list = func
+        if type(handler) == list:
+            self.handler_list = handler
         else:
-            self.func_list = [func]
+            self.handler_list = [handler]
         self.data = data_list
         self.wtype = kwargs.get('wtype') or 'thread'
         self.timeout = kwargs.get('timeout')
@@ -66,18 +66,18 @@ class Manager:
                 'test': test,
                 'suffix': suffix,
             }
-            wo = Worker(self.func_list[0], self.data, **kwarg)
+            wo = Worker(self.handler_list[0], self.data, **kwarg)
             self.workers.append(wo)
         else:
             num = num or 1
             cap = ll // num
             idx = 0
-            fl = len(self.func_list)
+            fl = len(self.handler_list)
             for i in range(0, ll, cap):
                 if idx >= fl:
-                    func = self.func_list[-1]
+                    func = self.handler_list[-1]
                 else:
-                    func = self.func_list[idx]
+                    func = self.handler_list[idx]
 
                 if idx + 1 == num:
                     to = ll
@@ -111,3 +111,4 @@ class Manager:
         if join:
             for i in range(len(self.workers)):
                 self.workers[i].join()
+

@@ -94,6 +94,27 @@ def Thread_closure_test():
 
 ```
 
+#### 处理类
+- 需要实现HandleUnit类，item为实例对象的入参
+
+```python
+from otils import HandleUnit
+
+class MyHandle(HandleUnit):
+    def __init__(self,item):
+        self.i1=item[0]
+        self.i2=item[1]
+
+    def handle(self):
+
+        return self.i1 + self.i2
+
+def Thread_handlerUnit_test():
+    data = [(i,k) for i,k in zip(range(100,111),range(11))]
+    tm = Manager(MyHandle, data, num=2, test=True)
+    tm.do_work()
+```
+
 #### 其他工具
 
 - 文本与xlsx读写

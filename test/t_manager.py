@@ -1,3 +1,5 @@
+import sys
+sys.path.insert(0,'..')
 from otils import Manager,cost
 from functools import partial
 
@@ -65,11 +67,28 @@ def Coro_test(timeout=10):
     tm.do_work()
 
 
+from otils import HandleUnit
+
+class MyHandle(HandleUnit):
+    def __init__(self,item):
+        self.i1=item[0]
+        self.i2=item[1]
+
+    def handle(self):
+
+        return self.i1 + self.i2
+
+def Thread_handlerUnit_test():
+    data = [(i,k) for i,k in zip(range(100,111),range(11))]
+    tm = Manager(MyHandle, data, num=2, test=True)
+    tm.do_work()
+
 if __name__ == '__main__':
-    # Thread_test()
+    Thread_test()
     # Coro_test()
     # Thread_partial_test()
     # Thread_closure_test()
     # Process_test()
     # Thread_error_test()
+    # Thread_handlerUnit_test()
     print('end')
