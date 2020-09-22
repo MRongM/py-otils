@@ -55,6 +55,22 @@ def sinput(ele,value):
         print(f"click error:{e}")
     return False
 
+def stext(ele):
+    text = ''
+    try:
+        text = ele.text
+    except Exception as e:
+        print(f"text error:{e}")
+    return text
+
+def sscroll(driver,distance=1000):
+    try:
+        driver.execute_script(f"var q=document.documentElement.scrollTop={distance}")
+        return True
+    except Exception as e:
+        print(f"scroll error:{e}")
+    return False 
+
 def sclose(driver):
     driver.close()
 
