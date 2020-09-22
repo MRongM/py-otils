@@ -86,3 +86,21 @@ def rheader(content='json'):
         'content-type': content_type,
     }
     return head
+
+def shot_element(driver, xpath):
+	from PIL import Image
+	import time
+	import os
+
+	e = find_element(driver, xpath)[0]
+	x = e.location['x']
+	y = e.location['y']
+	e_width = x + e.size['width']
+	e_height = y + e.size['height']
+	png = 'webdriver.png'
+	driver.save_screenshot(png)
+	pic = Image.open(png)
+	pic = pic.crop((x,y,e_width,e_height))
+	pic.save(f'crop_{int(time.time())}.png')
+	os.remove(png)
+
