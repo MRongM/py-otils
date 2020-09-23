@@ -8,7 +8,7 @@ def sdriver(path=None,head=True):
     option = ChromeOptions()
     option.add_experimental_option('excludeSwitches', ['enable-automation'])
     if not head:
-        chrome_options.add_argument('--headless')
+        option.add_argument('--headless')
     if path:
         return webdriver.Chrome(options=option,executable_path=path)
     else:
