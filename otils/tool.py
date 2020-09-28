@@ -109,3 +109,11 @@ def cost(sli=None):
         return warp
 
     return _cost
+
+def run_server(python='python'):
+    import subprocess
+    import os
+    server_path = os.path.join(os.path.split(os.path.realpath(__file__))[0],'server.py')
+    print(server_path)
+    p = subprocess.Popen([python, os.path.expanduser(server_path)])
+    print("server pid:",p.pid)
