@@ -2,11 +2,14 @@
 selenium requests 相关封装模块
 """
 
-def sdriver(path=None,head=True):
+def sdriver(path=None,head=True,img=True):
     from selenium import webdriver
     from selenium.webdriver import ChromeOptions
     option = ChromeOptions()
     option.add_experimental_option('excludeSwitches', ['enable-automation'])
+    if not img:
+        prefs = {'profile.default_content_setting_values': {'images': 2,}}
+        option.add_experimental_option('prefs', prefs)
     if not head:
         option.add_argument('--headless')
     if path:
