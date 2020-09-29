@@ -14,5 +14,5 @@ def start_flask(route='/',port=8064):
 
 if __name__ == '__main__':
     import sys
-    
-    start_flask()
+    print('sys.argv:',sys.argv)
+    # start_flask()
