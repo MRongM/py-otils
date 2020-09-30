@@ -110,12 +110,12 @@ def cost(sli=None):
 
     return _cost
 
-def run_server(module_path=None,python='python',port='8064'):
+def run_server(module_path,python='python',port='8064'):
     """
     开启一个与当前进程无关的独立web服务进程
     """
-    if type(module_path) is str:
-        raise ValueError("module_path must str and need")
+    if type(module_path) is not str:
+        raise ValueError("module_path must str")
 
     import subprocess
     import os

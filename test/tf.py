@@ -1,3 +1,3 @@
-def foo(json):
-    print(json)
+def apply(json):
+    print('fooo',json)
     return {"ok":'okk'}
