@@ -3,6 +3,7 @@
 ### 说明
 - python office utils for human beings
 - 常用工具包装模块
+- 用最少的依赖做最多事
 
 ### 安装
 ```

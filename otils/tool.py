@@ -109,3 +109,17 @@ def cost(sli=None):
         return warp
 
     return _cost
+
+def run_server(module_path,python='python',port='8064'):
+    """
+    开启一个与当前进程无关的独立web服务进程
+    """
+    if type(module_path) is not str:
+        raise ValueError("module_path must str")
+
+    import subprocess
+    import os
+    server_path = os.path.join(os.path.split(os.path.realpath(__file__))[0],'server.py')
+    print(server_path)
+    p = subprocess.Popen([python, os.path.expanduser(server_path),port,module_path])
+    print("server pid:",p.pid)
