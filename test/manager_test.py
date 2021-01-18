@@ -1,6 +1,7 @@
 import sys
-sys.path.insert(0,'..')
-from otils import Manager,cost
+
+sys.path.insert(0, '..')
+from otils import Manager, cost
 from functools import partial
 
 
@@ -9,7 +10,7 @@ def add(m, n):
 
 
 def Thread_test():
-    tm = Manager(lambda x: x + 10, list(range(11)), num=2, test=True,suffix='xlsx')
+    tm = Manager(lambda x: x + 10, list(range(11)), num=2, test=True, suffix='xlsx')
     tm.do_work()
 
 
@@ -58,30 +59,33 @@ def Thread_error_test(test=True):
     tm = Manager(func_list, list(range(11)), num=2, test=test)
     tm.do_work()
 
+
 @cost()
 def Coro_test(timeout=10):
     add_100 = wadd(100)
     add_10 = wadd(10)
     func_list = [add_10, add_100]
-    tm = Manager(func_list, list(range(11)), num=3, test=True, wtype='coro',sleep=2,timeout=timeout)
+    tm = Manager(func_list, list(range(11)), num=3, test=True, wtype='coro', sleep=2, timeout=timeout)
     tm.do_work()
 
 
 from otils import HandleUnit
 
+
 class MyHandle(HandleUnit):
-    def __init__(self,item):
-        self.i1=item[0]
-        self.i2=item[1]
+    def __init__(self, item):
+        self.i1 = item[0]
+        self.i2 = item[1]
 
     def handle(self):
-
         return self.i1 + self.i2
 
+
 def Thread_handlerUnit_test():
-    data = [(i,k) for i,k in zip(range(100,111),range(11))]
+    data = [(i, k) for i, k in zip(range(100, 111), range(11))]
     tm = Manager(MyHandle, data, num=2, test=True)
     tm.do_work()
+
 
 if __name__ == '__main__':
     Thread_test()
