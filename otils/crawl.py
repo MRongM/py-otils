@@ -104,7 +104,7 @@ def shot_element(driver, xpath):
     import time
     import os
 
-    e = find_element(driver, xpath)[0]
+    e = sfinde(driver, xpath)
     x = e.location['x']
     y = e.location['y']
     e_width = x + e.size['width']
