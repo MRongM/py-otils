@@ -59,20 +59,36 @@ class HandleUnit:
 
 
 class Writer:
-    def __init__(self, filename, suffix='txt', delimiter='_#_', path=''):
+    def __init__(self, filename, suffix='txt', delimiter='_#_', path='', title_translate=None):
         self.suffix = suffix
         self.delimiter = delimiter
         self.path = os.path.join(path, f'{filename}.{suffix}')
+        self.title_translate = title_translate
+
+    def _workbook_write(self, ws, data, is_dict=False):
+        if is_dict:
+            titles = data[0].keys()
+            if self.title_translate:
+                tran = [self.title_translate[i] for i in titles]
+            else:
+                tran = [titles]
+            for item in data:
+                row = []
+                for title in titles:
+                    row.append(item[title])
+                tran.append(row)
+            data = tran
+
+        for row, item in enumerate(data):
+            for col, dat in enumerate(item):
+                ws.write(row, col, dat)
 
     def write(self, data):
         if self.suffix == 'xlsx':
             from xlsxwriter import workbook
             wb = workbook.Workbook(self.path)
             ws = wb.add_worksheet()
-
-            for row, item in enumerate(data):
-                for col, dat in enumerate(item):
-                    ws.write(row, col, dat)
+            self._workbook_write(ws, data, isinstance(data[0], dict))
             wb.close()
 
         elif self.suffix == 'txt':
